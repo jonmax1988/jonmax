@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jon.max.mapper.UserMapper">
+
+    <!--
+    id:sql片段的唯一标识，同一个mapper文件中不能重复
+    parameterType：参数类型
+    resultType：返回值类型
+    -->
+    <resultMap id="userResult" type="User" >
+        <id property="name" column="name"/>
+        <result property="password" column="password"/>
+    </resultMap>
+
+    <select id="queryUserByName" resultType="jon.max.domain.User">
+        SELECT
+            name,
+            password
+        FROM jon_user
+        WHERE name = #{name}
+    </select>
+
+    <select id="login" resultType="jon.max.domain.User">
+        SELECT
+            name,
+            password
+        FROM jon_user
+        WHERE name = #{user} and password = #{password}
+    </select>
+
+    <select id="queryUsers" resultType="jon.max.domain.User">
+        SELECT
+            name,
+            password
+        FROM jon_user
+        WHERE name = #{name} and password = #{password}
+    </select>
+</mapper>
